@@ -19,6 +19,8 @@ A smart gym recommendation app that helps users discover and find gyms based on 
 ## Layout
 
 ```
+.github/
+  workflows/       # CI pipeline
 app/               # Next.js app router
 components/        # UI components
 lib/               # Places/Maps clients, localStorage helpers
