@@ -5,7 +5,7 @@ A smart gym recommendation app that helps users discover and find gyms based on 
 - Search and filter gyms by location, amenities, and fitness goals
 - Interactive map view powered by Google Maps
 - Gym and location data from Google Places API
-- User preferences and saved gyms stored in Supabase
+- Save preferences and favourite gyms locally
 
 ## Stack
 
@@ -13,16 +13,17 @@ A smart gym recommendation app that helps users discover and find gyms based on 
 - React
 - TypeScript
 - Tailwind CSS
-- PostgreSQL
 - Google Places API
+- LocalStorage
 
 ## Layout
 
 ```
 app/               # Next.js app router
 components/        # UI components
-lib/               # Supabase helpers, Places/Maps clients
+lib/               # Places/Maps clients, localStorage helpers
 styles/            # global styles / Tailwind
+tests/             # unit and integration tests
 ```
 
 ## Run
