@@ -13,10 +13,8 @@ A smart gym recommendation app that helps users discover and find gyms based on 
 - React
 - TypeScript
 - Tailwind CSS
-- Supabase / PostgreSQL
+- PostgreSQL
 - Google Places API
-- Google Maps
-- Vercel
 
 ## Layout
 
@@ -26,12 +24,6 @@ components/        # UI components
 lib/               # Supabase helpers, Places/Maps clients
 styles/            # global styles / Tailwind
 ```
-
-
-
-
-
-
 
 ## Run
 
@@ -47,8 +39,6 @@ Open [http://localhost:3000](http://localhost:3000).
 npm test
 npm run lint
 ```
-
-
 
 ## License
 
