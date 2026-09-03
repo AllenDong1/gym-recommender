@@ -1,47 +1,6 @@
 import { Dumbbell, MapPin, Search, Star, Trophy } from "lucide-react";
-
-const FEATURED_GYMS = [
-  {
-    name: "Anytime Fitness Bondi",
-    brand: "Anytime Fitness",
-    suburb: "Bondi Beach",
-    state: "NSW",
-    postcode: "2026",
-    rating: 4.5,
-    reviewCount: 312,
-    amenities: ["24/7 Access", "Personal Training", "Parking"],
-  },
-  {
-    name: "Fitness First Sydney CBD",
-    brand: "Fitness First",
-    suburb: "Sydney",
-    state: "NSW",
-    postcode: "2000",
-    rating: 4.3,
-    reviewCount: 891,
-    amenities: ["Pool", "Sauna", "Group Classes"],
-  },
-  {
-    name: "F45 Training Newtown",
-    brand: "F45",
-    suburb: "Newtown",
-    state: "NSW",
-    postcode: "2042",
-    rating: 4.7,
-    reviewCount: 428,
-    amenities: ["Group Classes", "Personal Training"],
-  },
-  {
-    name: "Virgin Active Pitt Street",
-    brand: "Virgin Active",
-    suburb: "Sydney",
-    state: "NSW",
-    postcode: "2000",
-    rating: 4.6,
-    reviewCount: 654,
-    amenities: ["Pool", "Sauna", "Cafe"],
-  },
-];
+import { GYMS } from "@/lib/gyms";
+import { searchGyms } from "@/lib/search";
 
 const REGIONS = [
   { name: "Sydney CBD", gymCount: 3, description: "City centre and inner suburbs" },
@@ -52,7 +11,14 @@ const REGIONS = [
   { name: "Greater Western Sydney", gymCount: 1, description: "Parramatta and western Sydney" },
 ];
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q = "" } = await searchParams;
+  const gyms = searchGyms(GYMS, q);
+
   return (
     <main className="flex-1">
       <section className="bg-gradient-to-br from-primary/5 via-background to-primary/10 py-20">
@@ -69,6 +35,7 @@ export default function HomePage() {
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 name="q"
+                defaultValue={q}
                 placeholder="Search by suburb, postcode, or address…"
                 className="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
@@ -87,10 +54,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-8 flex items-center gap-2">
             <Trophy className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">Top Rated Gyms</h2>
+            <h2 className="text-2xl font-bold">
+              {q.trim() ? `Results for “${q.trim()}”` : "Top Rated Gyms"}
+            </h2>
           </div>
+          {gyms.length === 0 ? (
+            <p className="text-muted-foreground">No gyms match that search.</p>
+          ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURED_GYMS.map((gym) => (
+            {gyms.map((gym) => (
               <article
                 key={gym.name}
                 className="overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md"
@@ -130,6 +102,7 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          )}
         </div>
       </section>
 
