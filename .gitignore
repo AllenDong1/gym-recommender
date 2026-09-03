@@ -220,5 +220,10 @@ __marimo__/
 # Node
 node_modules/
 
+# Next.js
+.next/
+out/
+*.tsbuildinfo
+
 # App source folders (override Python lib/ ignore above)
 !/lib/
