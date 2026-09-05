@@ -1,0 +1,65 @@
+[
+  {
+    "id": "inner-west",
+    "name": "Inner West",
+    "state": "NSW",
+    "description": "Newtown, Marrickville, Ashfield and surrounding suburbs",
+    "image": "/images/regions/inner-west.jpg"
+  },
+  {
+    "id": "eastern-suburbs",
+    "name": "Eastern Suburbs",
+    "state": "NSW",
+    "description": "Bondi, Randwick, Coogee and the beachside east",
+    "image": "/images/regions/eastern-suburbs.jpg"
+  },
+  {
+    "id": "north-shore",
+    "name": "North Shore",
+    "state": "NSW",
+    "description": "Chatswood, North Sydney, Mosman and the lower north shore",
+    "image": "/images/regions/north-shore.jpg"
+  },
+  {
+    "id": "greater-western-sydney",
+    "name": "Greater Western Sydney",
+    "state": "NSW",
+    "description": "Parramatta, Penrith, Blacktown and western Sydney",
+    "image": "/images/regions/gws.jpg"
+  },
+  {
+    "id": "sydney-cbd",
+    "name": "Sydney CBD & Inner City",
+    "state": "NSW",
+    "description": "Sydney city centre, Surry Hills, Pyrmont and Darlinghurst",
+    "image": "/images/regions/sydney-cbd.jpg"
+  },
+  {
+    "id": "northern-beaches",
+    "name": "Northern Beaches",
+    "state": "NSW",
+    "description": "Manly, Dee Why, Palm Beach and the northern coastline",
+    "image": "/images/regions/northern-beaches.jpg"
+  },
+  {
+    "id": "southern-suburbs",
+    "name": "Southern Suburbs & Sutherland Shire",
+    "state": "NSW",
+    "description": "Hurstville, Kogarah, Cronulla and the St George area",
+    "image": "/images/regions/southern-suburbs.jpg"
+  },
+  {
+    "id": "hills-district",
+    "name": "The Hills District",
+    "state": "NSW",
+    "description": "Castle Hill, Baulkham Hills, Kellyville and the north-west",
+    "image": "/images/regions/hills-district.jpg"
+  },
+  {
+    "id": "south-western-sydney",
+    "name": "South Western Sydney",
+    "state": "NSW",
+    "description": "Liverpool, Campbelltown, Camden and the broader south-west",
+    "image": "/images/regions/south-western-sydney.jpg"
+  }
+]

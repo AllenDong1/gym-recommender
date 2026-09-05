@@ -2,23 +2,36 @@ import Link from "next/link";
 import { Dumbbell, MapPin, Search, Star, Trophy } from "lucide-react";
 import { GYMS } from "@/lib/gyms";
 import { searchGyms } from "@/lib/search";
+import REGIONS from "@/data/regions.json";
 
-const REGIONS = [
-  { name: "Sydney CBD", query: "Sydney", description: "City centre and inner suburbs" },
-  { name: "Eastern Suburbs", query: "Bondi", description: "Bondi and the beachside east" },
-  { name: "Inner West", query: "Newtown", description: "Newtown, Alexandria and nearby" },
-  { name: "North Shore", query: "Chatswood", description: "Chatswood and the lower north shore" },
-  { name: "Northern Beaches", query: "Manly", description: "Manly, Dee Why and the coast" },
-  { name: "Greater Western Sydney", query: "Parramatta", description: "Parramatta and western Sydney" },
-];
+const TOP_RATED_COUNT = 12;
 
 export default async function HomePage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; region?: string }>;
 }) {
-  const { q = "" } = await searchParams;
-  const gyms = searchGyms(GYMS, q);
+  const { q = "", region = "" } = await searchParams;
+  const query = q.trim();
+  const selectedRegion = REGIONS.find((item) => item.id === region);
+
+  const filtered = selectedRegion
+    ? GYMS.filter((gym) => gym.region === selectedRegion.id)
+    : searchGyms(GYMS, query);
+
+  const gyms =
+    query || selectedRegion
+      ? filtered
+      : [...filtered]
+          .sort((a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount)
+          .slice(0, TOP_RATED_COUNT);
+
+  const heading = query
+    ? `Results for “${query}”`
+    : selectedRegion
+      ? selectedRegion.name
+      : "Top Rated Gyms";
+  const isFiltered = Boolean(query || selectedRegion);
 
   return (
     <main className="flex-1">
@@ -56,13 +69,13 @@ export default async function HomePage({
           <div className="mb-8">
             <div className="flex items-center gap-2">
               <Trophy className="h-6 w-6 text-primary" />
-              <h2 className="text-2xl font-bold">
-                {q.trim() ? `Results for “${q.trim()}”` : "Top Rated Gyms"}
-              </h2>
+              <h2 className="text-2xl font-bold">{heading}</h2>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">
-              {gyms.length} {gyms.length === 1 ? "gym" : "gyms"}
-              {q.trim() ? (
+              {isFiltered
+                ? `${gyms.length} ${gyms.length === 1 ? "gym" : "gyms"}`
+                : `${gyms.length} of ${GYMS.length} gyms`}
+              {isFiltered ? (
                 <>
                   {" · "}
                   <Link href="/" className="text-primary hover:underline">
@@ -78,7 +91,7 @@ export default async function HomePage({
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {gyms.map((gym) => (
               <article
-                key={gym.name}
+                key={gym.id}
                 className="overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md"
               >
                 <div className="h-40 bg-gradient-to-br from-primary/10 to-primary/5" />
@@ -161,11 +174,13 @@ export default async function HomePage({
           <h2 className="mb-6 text-2xl font-bold">Browse by Region</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
             {REGIONS.map((region) => {
-              const gymCount = searchGyms(GYMS, region.query).length;
+              const gymCount = GYMS.filter((gym) => gym.region === region.id)
+                .length;
+              if (gymCount === 0) return null;
               return (
                 <Link
-                  key={region.name}
-                  href={`/?q=${encodeURIComponent(region.query)}`}
+                  key={region.id}
+                  href={`/?region=${region.id}`}
                   className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
                 >
                   <div className="h-32 bg-gradient-to-br from-primary/10 to-primary/5" />
