@@ -1,14 +1,15 @@
+import Link from "next/link";
 import { Dumbbell, MapPin, Search, Star, Trophy } from "lucide-react";
 import { GYMS } from "@/lib/gyms";
 import { searchGyms } from "@/lib/search";
 
 const REGIONS = [
-  { name: "Sydney CBD", gymCount: 3, description: "City centre and inner suburbs" },
-  { name: "Eastern Suburbs", gymCount: 2, description: "Bondi and the beachside east" },
-  { name: "Inner West", gymCount: 2, description: "Newtown, Alexandria and nearby" },
-  { name: "North Shore", gymCount: 1, description: "Chatswood and the lower north shore" },
-  { name: "Northern Beaches", gymCount: 2, description: "Manly, Dee Why and the coast" },
-  { name: "Greater Western Sydney", gymCount: 1, description: "Parramatta and western Sydney" },
+  { name: "Sydney CBD", query: "Sydney", description: "City centre and inner suburbs" },
+  { name: "Eastern Suburbs", query: "Bondi", description: "Bondi and the beachside east" },
+  { name: "Inner West", query: "Newtown", description: "Newtown, Alexandria and nearby" },
+  { name: "North Shore", query: "Chatswood", description: "Chatswood and the lower north shore" },
+  { name: "Northern Beaches", query: "Manly", description: "Manly, Dee Why and the coast" },
+  { name: "Greater Western Sydney", query: "Parramatta", description: "Parramatta and western Sydney" },
 ];
 
 export default async function HomePage({
@@ -52,11 +53,24 @@ export default async function HomePage({
 
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8 flex items-center gap-2">
-            <Trophy className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">
-              {q.trim() ? `Results for “${q.trim()}”` : "Top Rated Gyms"}
-            </h2>
+          <div className="mb-8">
+            <div className="flex items-center gap-2">
+              <Trophy className="h-6 w-6 text-primary" />
+              <h2 className="text-2xl font-bold">
+                {q.trim() ? `Results for “${q.trim()}”` : "Top Rated Gyms"}
+              </h2>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {gyms.length} {gyms.length === 1 ? "gym" : "gyms"}
+              {q.trim() ? (
+                <>
+                  {" · "}
+                  <Link href="/" className="text-primary hover:underline">
+                    Clear search
+                  </Link>
+                </>
+              ) : null}
+            </p>
           </div>
           {gyms.length === 0 ? (
             <p className="text-muted-foreground">No gyms match that search.</p>
@@ -146,23 +160,27 @@ export default async function HomePage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-2xl font-bold">Browse by Region</h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {REGIONS.map((region) => (
-              <article
-                key={region.name}
-                className="overflow-hidden rounded-lg border border-border bg-card shadow-sm"
-              >
-                <div className="h-32 bg-gradient-to-br from-primary/10 to-primary/5" />
-                <div className="p-4">
-                  <h3 className="text-sm font-semibold">{region.name}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {region.gymCount} {region.gymCount === 1 ? "gym" : "gyms"}
-                  </p>
-                  <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
-                    {region.description}
-                  </p>
-                </div>
-              </article>
-            ))}
+            {REGIONS.map((region) => {
+              const gymCount = searchGyms(GYMS, region.query).length;
+              return (
+                <Link
+                  key={region.name}
+                  href={`/?q=${encodeURIComponent(region.query)}`}
+                  className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+                >
+                  <div className="h-32 bg-gradient-to-br from-primary/10 to-primary/5" />
+                  <div className="p-4">
+                    <h3 className="text-sm font-semibold">{region.name}</h3>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {gymCount} {gymCount === 1 ? "gym" : "gyms"}
+                    </p>
+                    <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
+                      {region.description}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
