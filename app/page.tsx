@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Dumbbell, MapPin, Search, Star, Trophy } from "lucide-react";
-import { GYMS } from "@/lib/gyms";
+import { GYMS, type Gym } from "@/lib/gyms";
 import { searchGyms } from "@/lib/search";
 import REGIONS from "@/data/regions.json";
 
-const TOP_RATED_COUNT = 12;
+const TOP_PER_REGION = 4;
 
 export default async function HomePage({
   searchParams,
@@ -18,28 +18,33 @@ export default async function HomePage({
   const filtered = selectedRegion
     ? GYMS.filter((gym) => gym.region === selectedRegion.id)
     : searchGyms(GYMS, query);
+  const isFiltered = Boolean(query || selectedRegion);
 
-  const gyms =
-    query || selectedRegion
-      ? filtered
-      : [...filtered]
+  const gyms = isFiltered
+    ? filtered
+    : [];
+  const regionGroups = isFiltered
+    ? []
+    : REGIONS.map((item) => ({
+        region: item,
+        gyms: GYMS.filter((gym) => gym.region === item.id)
           .sort((a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount)
-          .slice(0, TOP_RATED_COUNT);
+          .slice(0, TOP_PER_REGION),
+      })).filter((group) => group.gyms.length > 0);
 
   const heading = query
     ? `Results for “${query}”`
     : selectedRegion
       ? selectedRegion.name
       : "Top Rated Gyms";
-  const isFiltered = Boolean(query || selectedRegion);
 
   return (
     <main className="flex-1">
       <section className="bg-gradient-to-br from-primary/5 via-background to-primary/10 py-20">
         <div className="mx-auto max-w-7xl space-y-6 px-4 text-center sm:px-6 lg:px-8">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Find a gym that{" "}
-            <span className="text-primary">actually fits</span>
+            Find the{" "}
+            <span className="text-primary">right gym</span> for you
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Search gyms near you by suburb, then compare amenities and ratings.
@@ -74,7 +79,7 @@ export default async function HomePage({
             <p className="mt-2 text-sm text-muted-foreground">
               {isFiltered
                 ? `${gyms.length} ${gyms.length === 1 ? "gym" : "gyms"}`
-                : `${gyms.length} of ${GYMS.length} gyms`}
+                : "Highest-rated gyms in each region"}
               {isFiltered ? (
                 <>
                   {" · "}
@@ -85,50 +90,29 @@ export default async function HomePage({
               ) : null}
             </p>
           </div>
-          {gyms.length === 0 ? (
-            <p className="text-muted-foreground">No gyms match that search.</p>
+          {isFiltered ? (
+            gyms.length === 0 ? (
+              <p className="text-muted-foreground">No gyms match that search.</p>
+            ) : (
+              <GymGrid gyms={gyms} />
+            )
           ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {gyms.map((gym) => (
-              <article
-                key={gym.id}
-                className="overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md"
-              >
-                <div className="h-40 bg-gradient-to-br from-primary/10 to-primary/5" />
-                <div className="space-y-3 p-4">
-                  <div>
-                    <h3 className="truncate font-semibold">{gym.name}</h3>
-                    <p className="text-sm text-muted-foreground">{gym.brand}</p>
+            <div className="space-y-12">
+              {regionGroups.map(({ region, gyms: regionGyms }) => (
+                <div key={region.id}>
+                  <div className="mb-4 flex items-end justify-between gap-4">
+                    <h3 className="text-lg font-semibold">{region.name}</h3>
+                    <Link
+                      href={`/?region=${region.id}`}
+                      className="text-sm font-medium text-primary hover:underline"
+                    >
+                      See all
+                    </Link>
                   </div>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <MapPin className="h-3.5 w-3.5 shrink-0" />
-                    <span className="truncate">
-                      {gym.suburb}, {gym.state} {gym.postcode}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm font-medium">
-                      {gym.rating.toFixed(1)}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      ({gym.reviewCount})
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-1">
-                    {gym.amenities.map((amenity) => (
-                      <span
-                        key={amenity}
-                        className="inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-semibold"
-                      >
-                        {amenity}
-                      </span>
-                    ))}
-                  </div>
+                  <GymGrid gyms={regionGyms} />
                 </div>
-              </article>
-            ))}
-          </div>
+              ))}
+            </div>
           )}
         </div>
       </section>
@@ -200,5 +184,56 @@ export default async function HomePage({
         </div>
       </section>
     </main>
+  );
+}
+
+function GymGrid({ gyms }: { gyms: Gym[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {gyms.map((gym) => (
+        <article
+          key={gym.id}
+          className="overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md"
+        >
+          <div className="relative h-40 bg-gradient-to-br from-primary/10 to-primary/5">
+            {gym.tags.length > 0 ? (
+              <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-1 p-3">
+                {gym.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center rounded-full bg-background/95 px-2.5 py-0.5 text-xs font-semibold shadow-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+          <div className="space-y-3 p-4">
+            <h3 className="truncate font-semibold">{gym.name}</h3>
+            <div className="flex items-center gap-1 text-sm text-muted-foreground">
+              <MapPin className="h-3.5 w-3.5 shrink-0" />
+              <span className="truncate">
+                {gym.suburb}, {gym.state} {gym.postcode}
+              </span>
+            </div>
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                <span className="text-sm font-medium">
+                  {gym.rating.toFixed(1)}
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  ({gym.reviewCount})
+                </span>
+              </div>
+              <p className="text-sm font-semibold text-primary">
+                from ${gym.weeklyPrice}/wk
+              </p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }

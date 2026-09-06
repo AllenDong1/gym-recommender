@@ -7,37 +7,43 @@ const gyms: Gym[] = [
     id: "bondi",
     name: "Anytime Fitness Bondi",
     brand: "Anytime Fitness",
+    address: "74 Campbell Parade",
     suburb: "Bondi Beach",
     state: "NSW",
     postcode: "2026",
     region: "eastern-suburbs",
     rating: 4.5,
     reviewCount: 312,
-    amenities: [],
+    weeklyPrice: 22,
+    tags: [],
   },
   {
     id: "cbd",
     name: "Fitness First Sydney CBD",
     brand: "Fitness First",
+    address: "170 Castlereagh St",
     suburb: "Sydney",
     state: "NSW",
     postcode: "2000",
     region: "sydney-cbd",
     rating: 4.3,
     reviewCount: 891,
-    amenities: [],
+    weeklyPrice: 28,
+    tags: [],
   },
   {
     id: "newtown",
     name: "F45 Training Newtown",
     brand: "F45",
+    address: "12 King St",
     suburb: "Newtown",
     state: "NSW",
     postcode: "2042",
     region: "inner-west",
     rating: 4.7,
     reviewCount: 428,
-    amenities: [],
+    weeklyPrice: 24,
+    tags: [],
   },
 ];
 
@@ -59,6 +65,11 @@ describe("searchGyms", () => {
 
   it("matches postcode", () => {
     const result = searchGyms(gyms, "2000");
+    expect(result.map((gym) => gym.name)).toEqual(["Fitness First Sydney CBD"]);
+  });
+
+  it("matches street address", () => {
+    const result = searchGyms(gyms, "castlereagh");
     expect(result.map((gym) => gym.name)).toEqual(["Fitness First Sydney CBD"]);
   });
 

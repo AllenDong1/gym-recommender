@@ -8,6 +8,7 @@ export function searchGyms(gyms: Gym[], query: string): Gym[] {
     (gym) =>
       gym.name.toLowerCase().includes(q) ||
       gym.brand.toLowerCase().includes(q) ||
+      gym.address.toLowerCase().includes(q) ||
       gym.suburb.toLowerCase().includes(q) ||
       gym.postcode.includes(q)
   );
