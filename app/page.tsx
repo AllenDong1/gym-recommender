@@ -1,11 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Dumbbell, MapPin, Search, Star, Trophy } from "lucide-react";
+import { Dumbbell, MapPin, Search, Star } from "lucide-react";
 import { GymCard } from "@/components/gyms/GymCard";
 import { GYMS, type Gym } from "@/lib/gyms";
 import { searchGyms } from "@/lib/search";
 import REGIONS from "@/data/regions.json";
-
-const TOP_PER_REGION = 4;
 
 export default async function HomePage({
   searchParams,
@@ -16,28 +15,18 @@ export default async function HomePage({
   const query = q.trim();
   const selectedRegion = REGIONS.find((item) => item.id === region);
 
-  const filtered = selectedRegion
+  const gyms = selectedRegion
     ? GYMS.filter((gym) => gym.region === selectedRegion.id)
-    : searchGyms(GYMS, query);
+    : query
+      ? searchGyms(GYMS, query)
+      : [];
   const isFiltered = Boolean(query || selectedRegion);
-
-  const gyms = isFiltered
-    ? filtered
-    : [];
-  const regionGroups = isFiltered
-    ? []
-    : REGIONS.map((item) => ({
-        region: item,
-        gyms: GYMS.filter((gym) => gym.region === item.id)
-          .sort((a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount)
-          .slice(0, TOP_PER_REGION),
-      })).filter((group) => group.gyms.length > 0);
 
   const heading = query
     ? `Results for “${query}”`
     : selectedRegion
       ? selectedRegion.name
-      : "Top Rated Gyms";
+      : "";
 
   return (
     <main className="flex-1">
@@ -47,9 +36,6 @@ export default async function HomePage({
             Find the{" "}
             <span className="text-primary">right gym</span> for you
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Search gyms near you by suburb, then compare amenities and ratings.
-          </p>
           <form className="mx-auto flex w-full max-w-xl gap-2" action="/">
             <div className="relative w-full flex-1">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -70,53 +56,27 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <div className="flex items-center gap-2">
-              <Trophy className="h-6 w-6 text-primary" />
+      {isFiltered ? (
+        <section className="py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-8">
               <h2 className="text-2xl font-bold">{heading}</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {gyms.length} {gyms.length === 1 ? "gym" : "gyms"}
+                {" · "}
+                <Link href="/" className="text-primary hover:underline">
+                  Clear search
+                </Link>
+              </p>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {isFiltered
-                ? `${gyms.length} ${gyms.length === 1 ? "gym" : "gyms"}`
-                : "Highest-rated gyms in each region"}
-              {isFiltered ? (
-                <>
-                  {" · "}
-                  <Link href="/" className="text-primary hover:underline">
-                    Clear search
-                  </Link>
-                </>
-              ) : null}
-            </p>
-          </div>
-          {isFiltered ? (
-            gyms.length === 0 ? (
+            {gyms.length === 0 ? (
               <p className="text-muted-foreground">No gyms match that search.</p>
             ) : (
               <GymGrid gyms={gyms} />
-            )
-          ) : (
-            <div className="space-y-12">
-              {regionGroups.map(({ region, gyms: regionGyms }) => (
-                <div key={region.id}>
-                  <div className="mb-4 flex items-end justify-between gap-4">
-                    <h3 className="text-lg font-semibold">{region.name}</h3>
-                    <Link
-                      href={`/?region=${region.id}`}
-                      className="text-sm font-medium text-primary hover:underline"
-                    >
-                      See all
-                    </Link>
-                  </div>
-                  <GymGrid gyms={regionGyms} />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+            )}
+          </div>
+        </section>
+      ) : null}
 
       <section className="bg-muted/10 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -127,8 +87,7 @@ export default async function HomePage({
               </div>
               <h3 className="text-lg font-semibold">Ratings & Reviews</h3>
               <p className="text-sm text-muted-foreground">
-                See community ratings and review counts to find highly rated
-                gyms in your area.
+                Find highly rated gyms in your area.
               </p>
             </div>
             <div className="space-y-3 text-center">
@@ -137,17 +96,16 @@ export default async function HomePage({
               </div>
               <h3 className="text-lg font-semibold">Location-Based</h3>
               <p className="text-sm text-muted-foreground">
-                Find gyms near you with suburb search and map views.
+                Find gyms in your suburb or postcode.
               </p>
             </div>
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                 <Dumbbell className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">All Major Brands</h3>
+              <h3 className="text-lg font-semibold">Franchised gyms</h3>
               <p className="text-sm text-muted-foreground">
-                Anytime Fitness, Fitness First, F45, and more — plus
-                independents.
+                Anytime Fitness, Fitness First, Plus Fitness...
               </p>
             </div>
           </div>
@@ -168,7 +126,15 @@ export default async function HomePage({
                   href={`/?region=${region.id}`}
                   className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
                 >
-                  <div className="h-32 bg-gradient-to-br from-primary/10 to-primary/5" />
+                  <div className="relative h-40 overflow-hidden bg-muted">
+                    <Image
+                      src={region.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    />
+                  </div>
                   <div className="p-4">
                     <h3 className="text-sm font-semibold">{region.name}</h3>
                     <p className="mt-1 text-xs text-muted-foreground">

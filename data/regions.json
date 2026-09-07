@@ -4,7 +4,7 @@
     "name": "Inner West",
     "state": "NSW",
     "description": "Newtown, Marrickville, Ashfield and surrounding suburbs",
-    "image": "/images/regions/inner-west.jpg"
+    "image": "/images/regions/inner-west-harbour.jpg"
   },
   {
     "id": "eastern-suburbs",
@@ -25,7 +25,7 @@
     "name": "Greater Western Sydney",
     "state": "NSW",
     "description": "Parramatta, Penrith, Blacktown and western Sydney",
-    "image": "/images/regions/gws.jpg"
+    "image": "/images/regions/gws-parramatta.jpg"
   },
   {
     "id": "sydney-cbd",
@@ -46,20 +46,20 @@
     "name": "Southern Suburbs & Sutherland Shire",
     "state": "NSW",
     "description": "Hurstville, Kogarah, Cronulla and the St George area",
-    "image": "/images/regions/southern-suburbs.jpg"
+    "image": "/images/regions/southern-suburbs-coast.jpg"
   },
   {
     "id": "hills-district",
     "name": "The Hills District",
     "state": "NSW",
     "description": "Castle Hill, Baulkham Hills, Kellyville and the north-west",
-    "image": "/images/regions/hills-district.jpg"
+    "image": "/images/regions/hills-aerial.jpg"
   },
   {
     "id": "south-western-sydney",
     "name": "South Western Sydney",
     "state": "NSW",
     "description": "Liverpool, Campbelltown, Camden and the broader south-west",
-    "image": "/images/regions/south-western-sydney.jpg"
+    "image": "/images/regions/south-western-sydney-night.jpg"
   }
 ]

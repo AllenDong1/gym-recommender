@@ -1,0 +1,42 @@
+Region card photos from Wikimedia Commons.
+
+inner-west-harbour.jpg
+  Aerial of Inner West harbour and marinas
+  Provided for this project
+
+eastern-suburbs.jpg
+  Bondi from above
+  Nick Ang, CC BY-SA 4.0
+  https://commons.wikimedia.org/wiki/File:Bondi_from_above.jpg
+
+north-shore.jpg
+  View from ferris wheel at Luna Park Sydney
+  Inas, CC BY-SA 3.0
+  https://commons.wikimedia.org/wiki/File:Australia_sydney_view_from_luna_park_ferris_wheel.jpg
+
+gws-parramatta.jpg
+  Aerial of Parramatta CBD and parklands
+  Provided for this project
+
+sydney-cbd.jpg
+  Sydney opera house and skyline
+  Matthew Field, CC BY 2.5
+  https://commons.wikimedia.org/wiki/File:Sydney_opera_house_and_skyline.jpg
+
+northern-beaches.jpg
+  Looking over Shelly Beach and Cabbage Tree Bay in Sydney
+  Hardlinerr, CC BY-SA 4.0
+  https://commons.wikimedia.org/wiki/File:Looking_over_Shelly_Beach_and_Cabbage_Tree_Bay_in_Sydney.jpg
+
+southern-suburbs-coast.jpg
+  Aerial of Cronulla coastline
+  Provided for this project
+
+hills-aerial.jpg
+  Aerial of Castle Hill and The Hills District
+  Provided for this project
+
+south-western-sydney-night.jpg
+  Liverpool, New South Wales at night
+  Ian B, CC BY-SA 2.0
+  https://commons.wikimedia.org/wiki/File:Liverpool,_New_South_Wales_at_night.jpg
