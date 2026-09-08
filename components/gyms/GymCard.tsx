@@ -1,25 +1,13 @@
 import Link from "next/link";
 import { MapPin, Star } from "lucide-react";
 import type { Gym } from "@/lib/gyms";
+import { GymHero } from "./GymHero";
 
 export function GymCard({ gym }: { gym: Gym }) {
   return (
     <article className="overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md">
       <Link href={`/gyms/${gym.slug}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-        <div className="relative h-40 bg-gradient-to-br from-primary/10 to-primary/5">
-          {gym.tags.length > 0 ? (
-            <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-1 p-3">
-              {gym.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-full bg-background/95 px-2.5 py-0.5 text-xs font-semibold shadow-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <GymHero gym={gym} className="h-40" />
         <div className="space-y-3 p-4">
           <h3 className="truncate font-semibold">{gym.name}</h3>
           <div className="flex items-center gap-1 text-sm text-muted-foreground">

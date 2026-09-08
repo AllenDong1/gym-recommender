@@ -13,8 +13,7 @@ export function Footer() {
             </span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Gym details are for discovery only. Confirm amenities and membership
-            with each gym directly.
+            Details are for reference. Confirm with the gym directly.
           </p>
         </div>
       </div>

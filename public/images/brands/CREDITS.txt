@@ -1,0 +1,16 @@
+Franchise logos used to identify gym brands on cards.
+
+anytime-fitness.svg
+  Anytime Fitness wordmark from anytimefitness.com
+fitness-first.png
+  Fitness First Australia logo from fitnessfirst.com.au
+virgin-active.png
+  Virgin Active logo from virginactive.com.au
+snap-fitness.svg
+  Snap Fitness logo from snapfitness.com
+f45.svg
+  F45 Training logo from f45training.com
+plus-fitness.jpg
+  Plus Fitness wordmark from plusfitness.com.au
+jetts.svg
+  Jetts Fitness wordmark from jetts.com.au

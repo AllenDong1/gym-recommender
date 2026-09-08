@@ -6,6 +6,7 @@ import {
   getGymBySlug,
   GYMS,
 } from "@/lib/gyms";
+import { GymHero } from "@/components/gyms/GymHero";
 import REGIONS from "@/data/regions.json";
 
 export function generateStaticParams() {
@@ -49,20 +50,7 @@ export default async function GymDetailPage({
         </Link>
 
         <article className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
-          <div className="relative h-56 bg-gradient-to-br from-primary/10 to-primary/5">
-            {gym.tags.length > 0 ? (
-              <div className="absolute inset-x-0 bottom-0 flex flex-wrap gap-1 p-4">
-                {gym.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="inline-flex items-center rounded-full bg-background/95 px-2.5 py-0.5 text-xs font-semibold shadow-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            ) : null}
-          </div>
+          <GymHero gym={gym} className="h-56" />
 
           <div className="space-y-8 p-6 sm:p-8">
             <div className="space-y-3">

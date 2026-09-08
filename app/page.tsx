@@ -136,10 +136,12 @@ export default async function HomePage({
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="text-sm font-semibold">{region.name}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {gymCount} {gymCount === 1 ? "gym" : "gyms"}
-                    </p>
+                    <div className="flex items-baseline gap-2">
+                      <h3 className="text-sm font-semibold">{region.name}</h3>
+                      <p className="text-xs text-muted-foreground">
+                        {gymCount} {gymCount === 1 ? "gym" : "gyms"}
+                      </p>
+                    </div>
                     <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
                       {region.description}
                     </p>
