@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gym Recommender — Find a gym that fits you",
+  title: "GymSwitch — Find a gym that fits you",
   description:
     "Discover gyms based on your location, fitness goals, and the amenities that matter.",
 };

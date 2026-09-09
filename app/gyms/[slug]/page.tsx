@@ -22,7 +22,7 @@ export async function generateMetadata({
   const gym = getGymBySlug(slug);
   if (!gym) return { title: "Gym not found" };
   return {
-    title: `${gym.name} — Gym Recommender`,
+    title: `${gym.name} — GymSwitch`,
     description: `${gym.name} in ${gym.suburb}. Compare address, amenities, and membership options.`,
   };
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Dumbbell } from "lucide-react";
+import { Logo } from "@/components/layout/Logo";
 
 export function Header() {
   return (
@@ -9,8 +9,8 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 text-xl font-bold text-primary"
         >
-          <Dumbbell className="h-6 w-6" />
-          <span>Gym Recommender</span>
+          <Logo priority className="h-12 w-12" />
+          <span>GymSwitch</span>
         </Link>
         <nav>
           <Link
