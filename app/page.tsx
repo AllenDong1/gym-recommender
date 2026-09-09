@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Dumbbell, MapPin, Search, Star } from "lucide-react";
+import { BadgePercent, Map, Search, SlidersHorizontal, Star } from "lucide-react";
 import { GymCard } from "@/components/gyms/GymCard";
 import { GYMS, type Gym } from "@/lib/gyms";
 import { searchGyms } from "@/lib/search";
@@ -30,29 +30,41 @@ export default async function HomePage({
 
   return (
     <main className="flex-1">
-      <section className="bg-gradient-to-br from-primary/5 via-background to-primary/10 py-20">
-        <div className="mx-auto max-w-7xl space-y-6 px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Find the{" "}
-            <span className="text-primary">right gym</span> for you
-          </h1>
-          <form className="mx-auto flex w-full max-w-xl gap-2" action="/">
-            <div className="relative w-full flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <input
-                name="q"
-                defaultValue={q}
-                placeholder="Search by suburb, postcode, or address…"
-                className="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              />
-            </div>
-            <button
-              type="submit"
-              className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-            >
-              Search
-            </button>
-          </form>
+      <section className="px-4 py-8 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl">
+          <Image
+            src="/images/hero-gym.png"
+            alt=""
+            fill
+            priority
+            quality={95}
+            className="object-cover"
+            sizes="(min-width: 1280px) 80rem, 100vw"
+          />
+          <div className="absolute inset-0 bg-black/20" />
+          <div className="relative z-10 space-y-6 px-4 py-20 text-center sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-md sm:text-5xl">
+              Gym Swap{" "}
+              <span className="text-blue-300">Made Easy</span>
+            </h1>
+            <form className="mx-auto flex w-full max-w-xl gap-2" action="/">
+              <div className="relative w-full flex-1">
+                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  name="q"
+                  defaultValue={q}
+                  placeholder="Search by suburb, postcode, or address…"
+                  className="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                />
+              </div>
+              <button
+                type="submit"
+                className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                Search
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
@@ -80,32 +92,41 @@ export default async function HomePage({
 
       <section className="bg-muted/10 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                 <Star className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Ratings & Reviews</h3>
+              <h3 className="text-lg font-semibold">Popular Gyms</h3>
               <p className="text-sm text-muted-foreground">
-                Find highly rated gyms in your area.
+                Find highly rated gyms near you.
               </p>
             </div>
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <MapPin className="h-6 w-6 text-primary" />
+                <BadgePercent className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Location-Based</h3>
+              <h3 className="text-lg font-semibold">Deals</h3>
               <p className="text-sm text-muted-foreground">
-                Find gyms in your suburb or postcode.
+                Compare trials, promotions, and prices.
               </p>
             </div>
             <div className="space-y-3 text-center">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <Dumbbell className="h-6 w-6 text-primary" />
+                <SlidersHorizontal className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Franchised gyms</h3>
+              <h3 className="text-lg font-semibold">Preferences</h3>
               <p className="text-sm text-muted-foreground">
-                Anytime Fitness, Fitness First, Plus Fitness...
+                Filter gyms by your preferences.
+              </p>
+            </div>
+            <div className="space-y-3 text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                <Map className="h-6 w-6 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold">Interactive Map</h3>
+              <p className="text-sm text-muted-foreground">
+                Explore gyms around you.
               </p>
             </div>
           </div>
