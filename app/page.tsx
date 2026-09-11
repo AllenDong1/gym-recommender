@@ -90,41 +90,41 @@ export default async function HomePage({
         </section>
       ) : null}
 
-      <section className="bg-muted/10 py-16">
+      <section className="bg-muted/10 py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <Star className="h-6 w-6 text-primary" />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="space-y-2 text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                <Star className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Popular Gyms</h3>
+              <h3 className="text-base font-semibold">Popular Gyms</h3>
               <p className="text-sm text-muted-foreground">
                 Find highly rated gyms near you.
               </p>
             </div>
-            <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <BadgePercent className="h-6 w-6 text-primary" />
+            <div className="space-y-2 text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                <BadgePercent className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Deals</h3>
+              <h3 className="text-base font-semibold">Deals</h3>
               <p className="text-sm text-muted-foreground">
                 Compare trials, promotions, and prices.
               </p>
             </div>
-            <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <SlidersHorizontal className="h-6 w-6 text-primary" />
+            <div className="space-y-2 text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                <SlidersHorizontal className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Preferences</h3>
+              <h3 className="text-base font-semibold">Preferences</h3>
               <p className="text-sm text-muted-foreground">
                 Filter gyms by your preferences.
               </p>
             </div>
-            <div className="space-y-3 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                <Map className="h-6 w-6 text-primary" />
+            <div className="space-y-2 text-center">
+              <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+                <Map className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="text-lg font-semibold">Interactive Map</h3>
+              <h3 className="text-base font-semibold">Interactive Map</h3>
               <p className="text-sm text-muted-foreground">
                 Explore gyms around you.
               </p>
