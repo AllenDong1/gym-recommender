@@ -133,6 +133,140 @@ export default async function HomePage({
         </div>
       </section>
 
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-6 text-2xl font-bold">Current Promotions</h2>
+          <div className="space-y-3">
+            <a
+              href="https://www.clublime.com.au/join-now/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Club Lime 24/7 gym. 5 weeks free. Sale extended. Join now."
+              className="flex h-32 items-center justify-between gap-3 overflow-hidden bg-black px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-6 sm:px-8"
+            >
+              <div className="flex w-44 shrink-0 items-center -translate-y-1 pl-5">
+                <Image
+                  src="/images/promotions/club-lime-logo.png"
+                  alt=""
+                  width={97}
+                  height={182}
+                  unoptimized
+                  className="h-28 w-auto"
+                />
+              </div>
+              <div className="flex h-full min-h-0 min-w-0 flex-1 items-center justify-center">
+                <Image
+                  src="/images/promotions/club-lime-offer.png"
+                  alt=""
+                  width={856}
+                  height={205}
+                  unoptimized
+                  className="h-full w-auto object-contain"
+                />
+              </div>
+              <ClaimOfferButton />
+            </a>
+            <a
+              href="https://housed.com.au/intro-offer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-32 items-center justify-between gap-3 bg-[#1a1a1a] px-4 text-[#f5f3ef] transition-colors hover:bg-[#242424] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-6 sm:px-8"
+            >
+              <div className="flex w-44 shrink-0 items-center">
+                <div>
+                  <p className="text-base font-bold tracking-[0.28em] sm:text-xl">
+                    HOUSED
+                  </p>
+                  <p className="mt-0.5 text-[10px] uppercase tracking-[0.32em] text-[#f5f3ef]/55">
+                    Intro offer
+                  </p>
+                </div>
+              </div>
+              <p className="min-w-0 flex-1 text-center font-serif text-lg leading-tight sm:text-3xl">
+                First 2 weeks for{" "}
+                <span className="italic">$1/week</span>
+                <span className="align-super text-xs">*</span>
+              </p>
+              <ClaimOfferButton />
+            </a>
+            <a
+              href="https://www.snapfitness.com/au/national-offer"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Snap Fitness. $5 to get started. T&Cs apply."
+              className="flex h-32 items-center justify-between gap-3 overflow-hidden bg-black px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-6 sm:px-8"
+            >
+              <div className="flex w-44 shrink-0 items-center">
+                <Image
+                  src="/images/promotions/snap-fitness-logo.png"
+                  alt=""
+                  width={180}
+                  height={26}
+                  unoptimized
+                  className="h-5 w-auto sm:h-6"
+                />
+              </div>
+              <div className="flex h-full min-h-0 min-w-0 flex-1 items-center justify-center">
+                <div className="relative h-full">
+                  <Image
+                    src="/images/promotions/snap-fitness-banner.png"
+                    alt=""
+                    width={1024}
+                    height={236}
+                    unoptimized
+                    className="h-full w-auto object-contain"
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-black to-transparent"
+                  />
+                </div>
+              </div>
+              <ClaimOfferButton />
+            </a>
+            <a
+              href="https://www.plusfitness.com.au/free-7-day--trial/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Plus Fitness. Free 7 day trial. T&Cs apply. Selected clubs only."
+              className="flex h-32 items-center justify-between gap-3 overflow-hidden bg-black px-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-6 sm:px-8"
+            >
+              <div className="flex w-44 shrink-0 items-center">
+                <Image
+                  src="/images/promotions/plus-fitness-logo.png"
+                  alt=""
+                  width={240}
+                  height={86}
+                  unoptimized
+                  className="h-8 w-auto sm:h-10"
+                />
+              </div>
+              <div className="flex min-w-0 flex-1 items-center justify-center">
+                <div className="flex flex-col items-start gap-1">
+                  <Image
+                    src="/images/promotions/plus-fitness-free.png"
+                    alt=""
+                    width={233}
+                    height={130}
+                    unoptimized
+                    className="h-12 w-auto sm:h-14"
+                  />
+                  <Image
+                    src="/images/promotions/plus-fitness-trial.png"
+                    alt=""
+                    width={457}
+                    height={133}
+                    unoptimized
+                    className="h-12 w-auto sm:h-14"
+                  />
+                </div>
+              </div>
+              <ClaimOfferButton />
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-muted/30 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="mb-6 text-2xl font-bold">Browse by Region</h2>
@@ -174,6 +308,14 @@ export default async function HomePage({
         </div>
       </section>
     </main>
+  );
+}
+
+function ClaimOfferButton() {
+  return (
+    <span className="shrink-0 border border-[#f5f3ef] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.22em] text-[#f5f3ef] sm:px-4 sm:text-xs">
+      Claim offer
+    </span>
   );
 }
 

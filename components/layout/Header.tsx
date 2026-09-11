@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { House } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 
 export function Header() {
@@ -15,9 +16,10 @@ export function Header() {
         <nav>
           <Link
             href="/"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            aria-label="Home"
+            className="inline-flex text-muted-foreground transition-colors hover:text-foreground"
           >
-            Home
+            <House className="h-5 w-5" />
           </Link>
         </nav>
       </div>
