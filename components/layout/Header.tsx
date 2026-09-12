@@ -17,9 +17,9 @@ export function Header() {
           <Link
             href="/"
             aria-label="Home"
-            className="inline-flex text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center justify-center p-1.5 text-muted-foreground transition-colors hover:text-foreground"
           >
-            <House className="h-5 w-5" />
+            <House className="h-9 w-9" />
           </Link>
         </nav>
       </div>

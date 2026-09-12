@@ -44,8 +44,8 @@ export default async function HomePage({
           <div className="absolute inset-0 bg-black/20" />
           <div className="relative z-10 space-y-6 px-4 py-20 text-center sm:px-6 lg:px-8">
             <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow-md sm:text-5xl">
-              Gym Swap{" "}
-              <span className="text-blue-300">Made Easy</span>
+              Find The Best{" "}
+              <span className="text-blue-300">Gym</span>
             </h1>
             <form className="mx-auto flex w-full max-w-xl gap-2" action="/">
               <div className="relative w-full flex-1">
